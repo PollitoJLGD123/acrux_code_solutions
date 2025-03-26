@@ -1,19 +1,15 @@
 import './App.css'
-import Header from '/components/Header'
-import Footer from '/components/Footer'
+import Header from './components/header'
+import Footer from './components/footer'
 
 function App() {
-
   return (
     <>
-      <Header/>
-
+      <Header />
       <body>
-        
-        
+        <h1>Welcome to Acrux</h1>
       </body>
-
-      <Footer/>
+      <Footer />
     </>
   )
 }
