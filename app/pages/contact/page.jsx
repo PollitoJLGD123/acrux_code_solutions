@@ -5,8 +5,12 @@ import { MapPin, Phone, Mail, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { useForm, ValidationError } from "@formspree/react"
 
 export default function Contact() {
+
+  const [state, handleSubmitFormspree] = useForm("mwplqggg") 
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,14 +27,11 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setIsSubmitting(true)
-
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false)
-      setSubmitSuccess(true)
+    await handleSubmitFormspree(e) 
+    
+    if (state.succeeded) {
       setFormData({
         name: "",
         email: "",
@@ -38,12 +39,7 @@ export default function Contact() {
         subject: "",
         message: "",
       })
-
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setSubmitSuccess(false)
-      }, 5000)
-    }, 1500)
+    }
   }
 
   return (
@@ -123,6 +119,12 @@ export default function Contact() {
                       placeholder="John Doe"
                       required
                     />
+                    <ValidationError 
+                      prefix="Name" 
+                      field="name"
+                      errors={state.errors}
+                      className="text-red-500 text-sm mt-1"
+                    />
                   </div>
 
                   <div>
@@ -137,6 +139,12 @@ export default function Contact() {
                       onChange={handleChange}
                       placeholder="john@example.com"
                       required
+                    />
+                    <ValidationError 
+                      prefix="Email" 
+                      field="email"
+                      errors={state.errors}
+                      className="text-red-500 text-sm mt-1"
                     />
                   </div>
                 </div>
@@ -153,6 +161,12 @@ export default function Contact() {
                       onChange={handleChange}
                       placeholder="+1 (555) 123-4567"
                     />
+                    <ValidationError 
+                      prefix="Phone" 
+                      field="phone"
+                      errors={state.errors}
+                      className="text-red-500 text-sm mt-1"
+                    />
                   </div>
 
                   <div>
@@ -166,6 +180,12 @@ export default function Contact() {
                       onChange={handleChange}
                       placeholder="Project Inquiry"
                       required
+                    />
+                    <ValidationError 
+                      prefix="Subject" 
+                      field="subject"
+                      errors={state.errors}
+                      className="text-red-500 text-sm mt-1"
                     />
                   </div>
                 </div>
@@ -183,10 +203,16 @@ export default function Contact() {
                     rows={5}
                     required
                   />
+                  <ValidationError 
+                    prefix="Message" 
+                    field="message"
+                    errors={state.errors}
+                    className="text-red-500 text-sm mt-1"
+                  />
                 </div>
 
-                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700" disabled={isSubmitting}>
-                  {isSubmitting ? (
+                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700" disabled={state.submitting}>
+                  {state.submitting ? (
                     <span className="flex items-center">
                       <svg
                         className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
@@ -217,6 +243,11 @@ export default function Contact() {
                     </span>
                   )}
                 </Button>
+                {state.succeeded && (
+                  <div className="bg-green-100 border border-green-200 text-green-800 rounded-md p-4">
+                    Thank you for your message! We'll get back to you soon.
+                  </div>
+                )}
               </form>
             </div>
           </div>
