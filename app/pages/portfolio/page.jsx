@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { Button } from "@/app/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { ExternalLink, X } from "lucide-react"
 
 export default function Portfolio() {
@@ -119,7 +119,7 @@ export default function Portfolio() {
                 <p className="text-gray-600 mb-4">{project.description}</p>
                 <Button
                   variant="outline"
-                  className="text-blue-600 border-blue-600 hover:bg-blue-50"
+                  className="text-white border-blue-600 hover:bg-blue-50"
                   onClick={(e) => {
                     e.stopPropagation()
                     setSelectedProject(project)
