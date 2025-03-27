@@ -36,13 +36,14 @@ export default function Home() {
           <div className="hidden lg:block">
             <div className="relative">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-400 to-blue-300 rounded-lg blur opacity-75"></div>
-              <div className="relative bg-white p-6 rounded-lg shadow-xl">
+              <div className="relative bg-white rounded-lg shadow-xl">
                 <Image
-                  src="/../public/home/fondo_home.jpeg"
+                  src="/home/fondo_home.jpeg"
                   width={500}
                   height={400}
                   alt="Web development illustration"
-                  className="w-full h-auto rounded"
+                  className="w-full h-auto rounded-lg p-2"
+
                 />
               </div>
             </div>
