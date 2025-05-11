@@ -14,12 +14,16 @@ import {
   ArrowUpRight,
   Send,
   ChevronUp,
+  Check,
+  AlertCircle,
 } from "lucide-react"
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
   const [emailFocus, setEmailFocus] = useState(false)
   const [email, setEmail] = useState("")
+  const [submitStatus, setSubmitStatus] = useState({ type: null, message: "" }) // Para manejar estado de envío
+  const [isSubmitting, setIsSubmitting] = useState(false) // Para manejar estado de carga
 
   const socialLinks = [
     { icon: <Facebook size={16} />, href: "#", label: "Facebook" },
@@ -29,11 +33,11 @@ export default function Footer() {
   ]
 
   const quickLinks = [
-    { name: "Nosotros", href: "#about" },
-    { name: "Servicios", href: "#services" },
-    { name: "Portafolio", href: "#portfolio" },
-    { name: "Blog", href: "#blog" },
-    { name: "Contacto", href: "#contact" },
+    { name: "Nosotros", href: "/pages/about" },
+    { name: "Servicios", href: "/pages/services" },
+    { name: "Portafolio", href: "/pages/portfolio" },
+    { name: "Blog", href: "/pages/blog" },
+    { name: "Contacto", href: "/pages/contact" },
   ]
 
   const serviceLinks = [
@@ -62,13 +66,49 @@ export default function Footer() {
     },
   ]
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Handle newsletter subscription
-    console.log("Subscribing email:", email)
-    setEmail("")
-    // Show success message or notification
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: "" });
+
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({ 
+          type: "success", 
+          message: "¡Te has suscrito correctamente!" 
+        });
+        setEmail("");
+      } else {
+        setSubmitStatus({ 
+          type: "error", 
+          message: data.message || "Ha ocurrido un error al procesar tu solicitud." 
+        });
+      }
+    } catch (error) {
+      console.error("Error al enviar el formulario:", error);
+      setSubmitStatus({ 
+        type: "error", 
+        message: "Error de conexión. Por favor, inténtalo de nuevo más tarde." 
+      });
+    } finally {
+      setIsSubmitting(false);
+      
+      // Limpiar mensaje después de 5 segundos
+      setTimeout(() => {
+        setSubmitStatus({ type: null, message: "" });
+      }, 5000);
+    }
+  };
 
   return (
     <footer className="bg-slate-950 text-white py-16 relative overflow-hidden">
@@ -110,25 +150,91 @@ export default function Footer() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Tu correo electrónico"
                   required
-                  className="w-full bg-slate-900/50 border border-slate-800/50 rounded-lg py-3 pl-4 pr-12 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-rose-500/40 transition-all duration-300"
+                  disabled={isSubmitting}
+                  className={`w-full bg-slate-900/50 border ${
+                    submitStatus.type === "error"
+                      ? "border-red-500/50"
+                      : submitStatus.type === "success"
+                      ? "border-green-500/50"
+                      : "border-slate-800/50"
+                  } rounded-lg py-3 pl-4 pr-12 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-rose-500/40 transition-all duration-300`}
                   onFocus={() => setEmailFocus(true)}
                   onBlur={() => setEmailFocus(false)}
                 />
                 <button
                   type="submit"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-md bg-gradient-to-r from-rose-500 to-pink-500 flex items-center justify-center text-white transition-all duration-300 hover:opacity-90"
+                  disabled={isSubmitting}
+                  className={`absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-md ${
+                    isSubmitting
+                      ? "bg-slate-700"
+                      : submitStatus.type === "success"
+                      ? "bg-green-500"
+                      : "bg-gradient-to-r from-rose-500 to-pink-500"
+                  } flex items-center justify-center text-white transition-all duration-300 ${
+                    isSubmitting ? "opacity-70 cursor-not-allowed" : "hover:opacity-90"
+                  }`}
                   aria-label="Suscribirse"
                 >
-                  <Send size={14} />
+                  {isSubmitting ? (
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                    >
+                      <svg className="w-4 h-4" viewBox="0 0 24 24">
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                          fill="none"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                    </motion.div>
+                  ) : submitStatus.type === "success" ? (
+                    <Check size={14} />
+                  ) : (
+                    <Send size={14} />
+                  )}
                 </button>
 
                 <motion.span
-                  className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-rose-500 to-pink-500"
+                  className={`absolute bottom-0 left-0 h-0.5 ${
+                    submitStatus.type === "error"
+                      ? "bg-red-500"
+                      : submitStatus.type === "success"
+                      ? "bg-green-500"
+                      : "bg-gradient-to-r from-rose-500 to-pink-500"
+                  }`}
                   initial={{ width: 0 }}
-                  animate={{ width: emailFocus ? "100%" : 0 }}
+                  animate={{ width: emailFocus ? "100%" : submitStatus.type ? "100%" : 0 }}
                   transition={{ duration: 0.3 }}
                 />
               </div>
+              
+              {/* Mensaje de estado */}
+              {submitStatus.message && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`text-xs ${
+                    submitStatus.type === "success" ? "text-green-400" : "text-red-400"
+                  } flex items-center space-x-1`}
+                >
+                  {submitStatus.type === "error" ? (
+                    <AlertCircle size={12} />
+                  ) : (
+                    <Check size={12} />
+                  )}
+                  <span>{submitStatus.message}</span>
+                </motion.div>
+              )}
             </form>
 
             <div className="flex space-x-3">
@@ -147,6 +253,7 @@ export default function Footer() {
             </div>
           </div>
 
+          {/* El resto del código del Footer se mantiene igual... */}
           {/* Links Section - Simplified */}
           <div className="lg:col-span-5 grid grid-cols-2 gap-8">
             <div className="space-y-6">
