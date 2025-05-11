@@ -83,10 +83,26 @@ export default function Footer() {
       const data = await response.json();
 
       if (response.ok) {
-        setSubmitStatus({ 
-          type: "success", 
-          message: "¡Te has suscrito correctamente!" 
-        });
+        switch (data.status) {
+          case 200:
+            setSubmitStatus({ 
+              type: "success", 
+              message: "Email registrado exitosamente!!" 
+            });
+            break;
+          case 400:
+            setSubmitStatus({ 
+              type: "error", 
+              message: "Email inválido. Por favor, verifica tu dirección de correo." 
+            });
+            break;
+          case 409:
+            setSubmitStatus({ 
+              type: "error", 
+              message: "Este email ya está registrado." 
+            });
+            break;
+        }
         setEmail("");
       } else {
         setSubmitStatus({ 

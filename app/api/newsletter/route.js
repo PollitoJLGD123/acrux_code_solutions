@@ -1,8 +1,6 @@
-import { promises as fs } from 'fs';
-import path from 'path';
-
-// Ruta al archivo JSON
+const path = require('node:path');
 const dataFilePath = path.join(process.cwd(), 'data', 'newsletter.json');
+const fs = require('node:fs/promises');
 
 export async function POST(request) {
   try {
@@ -10,7 +8,7 @@ export async function POST(request) {
     
     // Validaciones básicas
     if (!email || !email.includes('@')) {
-      return Response.json({ success: false, message: 'Email inválido' }, { status: 400 });
+      return Response.json({ status: 400 });
     }
 
     // Leer el archivo actual
@@ -25,7 +23,7 @@ export async function POST(request) {
 
     // Verificar si el email ya está suscrito
     if (newsletterData.subscribers.includes(email)) {
-      return Response.json({ success: false, message: 'Este email ya está suscrito' }, { status: 409 });
+      return Response.json({ status: 409 });
     }
 
     // Agregar nuevo suscriptor
@@ -35,12 +33,9 @@ export async function POST(request) {
     await fs.writeFile(dataFilePath, JSON.stringify(newsletterData, null, 2), 'utf8');
 
     // Retornar respuesta exitosa
-    return Response.json({ success: true, message: 'Suscripción exitosa' });
+    return Response.json({ status: 200 });
   } catch (error) {
     console.error('Error al procesar la suscripción:', error);
-    return Response.json(
-      { success: false, message: 'Error al procesar la solicitud' },
-      { status: 500 }
-    );
+    return Response.json({ status: 500 });
   }
 }
