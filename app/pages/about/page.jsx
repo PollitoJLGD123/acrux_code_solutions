@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react"
 import Image from "next/image"
 import { motion, useInView, useAnimation } from "framer-motion"
-import { Code, Monitor, Smartphone, User, Heart, Shield, Coffee, Lightbulb } from "lucide-react"
+import { Facebook, Heart, Shield, Coffee, Lightbulb, Github } from "lucide-react"
 
 export default function About() {
     const values = [
@@ -29,32 +29,7 @@ export default function About() {
         },
     ]
 
-    const services = [
-        {
-            title: "Páginas Web",
-            description:
-                "Creamos sitios web efectivos que funcionan en celulares, tablets y computadoras. Perfectos para dar a conocer tu negocio.",
-            icon: <Code className="h-6 w-6" />,
-        },
-        {
-            title: "Sistemas de Gestión",
-            description:
-                "Aplicaciones que te ayudan a controlar ventas, inventario, clientes y más. Olvídate de las hojas de cálculo y libretas.",
-            icon: <Monitor className="h-6 w-6" />,
-        },
-        {
-            title: "Apps Móviles",
-            description:
-                "Aplicaciones para celular que conectan con tus clientes o facilitan el trabajo de tu equipo, incluso sin conexión a internet.",
-            icon: <Smartphone className="h-6 w-6" />,
-        },
-        {
-            title: "Capacitación",
-            description:
-                "Te enseñamos a usar las herramientas digitales. No te dejamos solo con un manual, sino que te acompañamos hasta que domines el sistema.",
-            icon: <User className="h-6 w-6" />,
-        },
-    ]
+
 
     const ref = useRef(null)
     const isInView = useInView(ref, { once: true, margin: "-100px" })
@@ -215,43 +190,309 @@ export default function About() {
                 >
                     <div className="text-center max-w-3xl mx-auto mb-16">
                         <div className="inline-flex items-center px-3 py-1 rounded-full bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 text-rose-300 text-xs font-medium mb-4">
-                            NUESTROS SERVICIOS
+                            NUESTROS COLABORADORES
                         </div>
-                        <h2 className="text-3xl font-bold text-white mb-6">Soluciones a tu Medida</h2>
+                        <h2 className="text-3xl font-bold text-white mb-6">Colaboradores</h2>
                         <div className="h-px w-24 bg-gradient-to-r from-rose-500 to-pink-500 mx-auto mb-8 opacity-50"></div>
                         <p className="text-slate-300">
-                            Ofrecemos servicios adaptados a las necesidades reales de pequeños y medianos negocios, con precios
-                            accesibles y resultados concretos.
+                            Nuestro equipo dedicado a brindar soluciones innovadoras y eficientes para tus necesidades tecnológicas.
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {services.map((service, index) => (
-                            <motion.div
-                                key={index}
-                                className="bg-slate-800/10 backdrop-blur-sm p-6 rounded-xl border border-slate-700/50 hover:border-rose-500/30 transition-all duration-500 group"
-                                whileHover={{
-                                    y: -8,
-                                    boxShadow: "0 20px 40px -15px rgba(236, 72, 153, 0.15)",
-                                    transition: { duration: 0.3, ease: "easeOut" },
-                                }}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: 0.1 * index + 0.5 }}
-                            >
-                                <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-rose-500/10 to-pink-500/10 flex items-center justify-center mb-4 group-hover:from-rose-500/20 group-hover:to-pink-500/20 transition-all duration-300">
-                                    <div className="text-rose-400 group-hover:text-rose-300 transition-colors duration-300">
-                                        {service.icon}
+                    <div className="flex flex-col lg:flex-row justify-center items-center gap-8 px-4 max-w-5xl mx-auto">
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.6, delay: 0.6 }}
+                            className="w-full lg:w-1/3 bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl overflow-hidden flex flex-col items-center pt-8"
+                        >
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-rose-500 to-pink-500"></div>
+                            <div className="relative mb-4">
+                                <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-slate-700 p-1 bg-slate-800">
+                                    <div className="w-full h-full rounded-full overflow-hidden">
+                                        <img
+                                            src="/about/colabs/user.png"
+                                            alt="Colaborador 1"
+                                            className="w-full h-full object-cover"
+                                        />
                                     </div>
                                 </div>
-                                <h4 className="text-xl font-semibold text-white mb-3 group-hover:text-rose-300 transition-colors duration-300">
-                                    {service.title}
-                                </h4>
-                                <p className="text-slate-400 group-hover:text-slate-300 transition-colors duration-300">
-                                    {service.description}
+                            </div>
+                            <div className="p-6 text-center w-full">
+                                <h3 className="text-xl font-bold text-white mb-1">Fabian Ruiz</h3>
+                                <p className="text-rose-300 text-sm mb-3">Desarrollador Backend</p>
+                                <div className="h-px w-12 bg-gradient-to-r from-rose-500/30 to-pink-500/30 mx-auto mb-3"></div>
+                                <p className="text-slate-300 text-sm mb-4">
+                                    Desarrollador backend con sólida experiencia en Laravel y Next.js. Apasionado por la tecnología y por crear soluciones eficientes en el entorno web.
                                 </p>
-                            </motion.div>
-                        ))}
+
+                                <div className="mt-4 pt-4 border-t border-slate-700/50">
+                                    <div className="flex items-center justify-center gap-3 mb-2">
+                                        <div className="w-12 h-12 rounded-full overflow-hidden border border-rose-500/30 bg-white/10 p-0.5">
+                                            <img
+                                                src="/about/uni/unt.png"
+                                                alt="Logo Universidad"
+                                                className="w-full h-full object-cover rounded-full"
+                                            />
+                                        </div>
+                                        <div>
+                                            <p className="text-rose-200 text-xs font-medium">Universidad Nacional de Trujillo</p>
+                                            <p className="text-slate-400 text-xs text-left">Ingeniería de Sistemas</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="mt-5 pt-4 border-t border-slate-700/50">
+                                    <p className="text-rose-200 text-xs font-medium mb-3">Lenguajes & Tecnologías</p>
+                                    <div className="flex flex-wrap justify-center gap-2">
+                                        <span className="px-3 py-1 bg-red-500/80 rounded-full text-xs text-rose-200 border border-rose-500/30">Laravel</span>
+                                        <span className="px-3 py-1 bg-sky-500/90 rounded-full text-xs text-rose-200 border border-rose-500/30">SQL</span>
+                                        <span className="px-3 py-1 bg-emerald-600 rounded-full text-xs text-rose-200 border border-rose-500/30">Vue.js</span>
+                                        <span className="px-3 py-1 bg-green-500/20 rounded-full text-xs text-rose-200 border border-rose-500/30">Next.js</span>
+                                        <span className="px-3 py-1 bg-red-400/70 rounded-full text-xs text-rose-200 border border-blue-500/30">Java</span>
+                                    </div>
+                                </div>
+
+
+                                <div className="mt-4 pt-4 border-t border-slate-700/50">
+                                    <div className="flex items-center justify-center mb-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-rose-300 mr-2">
+                                            <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
+                                            <path d="M9 22v-4h6v4"></path>
+                                            <path d="M8 6h.01"></path>
+                                            <path d="M16 6h.01"></path>
+                                            <path d="M12 6h.01"></path>
+                                            <path d="M12 10h.01"></path>
+                                            <path d="M12 14h.01"></path>
+                                            <path d="M16 10h.01"></path>
+                                            <path d="M16 14h.01"></path>
+                                            <path d="M8 10h.01"></path>
+                                            <path d="M8 14h.01"></path>
+                                        </svg>
+                                        <p className="text-rose-200 text-xs font-medium">Trabajando actualmente en</p>
+                                    </div>
+                                    <div className="bg-slate-700/30 rounded-lg p-3 border border-rose-500/20">
+                                        <p className="text-white text-sm font-medium">Neon House Led (NHL)</p>
+                                        <p className="text-slate-300 text-xs">Desarrollador Backend</p>
+                                        <div className="mt-2 flex items-center justify-center">
+                                            <span className="inline-flex items-center px-2 py-1 rounded-full bg-green-500/20 text-green-300 text-xs">
+                                                <span className="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+                                                Disponible para proyectos
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flex justify-center gap-3 mb-5">
+                                <a href="https://www.linkedin.com/in/fabian-ruiz-santos-bb8762328/" className="w-8 h-8 rounded-full bg-slate-700/70 flex items-center justify-center text-rose-300 hover:bg-rose-500/40 transition-colors" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                </a>
+                                <a href="https://github.com/FabianRS123" className="w-8 h-8 rounded-full bg-slate-700/70 flex items-center justify-center text-rose-300 hover:bg-rose-500/40 transition-colors" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+                                </a>
+                                <a href="https://www.facebook.com/profile.php?id=100004147097373" className="w-8 h-8 rounded-full bg-slate-700/70 flex items-center justify-center text-rose-300 hover:bg-rose-500/40 transition-colors" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                                </a>
+                                <a href="https://www.instagram.com/fabianruizsantos/" className="w-8 h-8 rounded-full bg-slate-700/70 flex items-center justify-center text-rose-300 hover:bg-rose-500/40 transition-colors" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><circle cx="17.5" cy="6.5" r="1.5"></circle></svg>
+                                </a>
+                            </div>
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.8 }}
+                            className="w-full lg:w-1/3 bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl overflow-hidden flex flex-col items-center pt-8 transform lg:scale-110 relative z-10 shadow-xl shadow-rose-500/10"
+                        >
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-rose-500 to-pink-500"></div>
+                            <div className="relative mb-4">
+                                <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-rose-500/50 p-1 bg-slate-800">
+                                    <div className="w-full h-full rounded-full overflow-hidden">
+                                        <img
+                                            src="/about/colabs/photo_jose.jpg"
+                                            alt="Colaborador Principal"
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="p-6 text-center w-full">
+                                <h3 className="text-2xl font-bold text-white mb-1">Jose L. Gutierrez</h3>
+                                <p className="text-rose-300 text-sm mb-3">Desarrollador Web</p>
+                                <div className="h-px w-16 bg-gradient-to-r from-rose-500 to-pink-500 mx-auto mb-4"></div>
+                                <p className="text-slate-300 text-sm mb-4">
+                                    Desarrollador full stack con dominio de tecnologías como .NET, Node.js y Vue.js. Muy interesado en modelos de inteligencia artificial y en el desarrollo de aplicaciones web modernas.
+                                </p>
+
+                                <div className="mt-5 pt-4 border-t border-slate-700/50">
+                                    <div className="flex items-center justify-center gap-3 mb-2">
+                                        <div className="w-12 h-12 rounded-full overflow-hidden border border-rose-500/30 bg-white/10 p-0.5">
+                                            <img
+                                                src="/about/uni/unt.png"
+                                                alt="Logo Universidad"
+                                                className="w-full h-full object-cover rounded-full"
+                                            />
+                                        </div>
+                                        <div>
+                                            <p className="text-rose-200 text-xs font-medium">Universidad Nacional de Trujillo</p>
+                                            <p className="text-slate-400 text-xs text-left">Ingeniería de Sistemas</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="mt-5 pt-4 border-t border-slate-700/50">
+                                    <p className="text-rose-200 text-xs font-medium mb-3">Lenguajes & Tecnologías</p>
+                                    <div className="flex flex-wrap justify-center gap-2">
+                                        <span className="px-3 py-1 bg-sky-400/50 rounded-full text-xs text-rose-200 border border-blue-500/30">.NET</span>
+                                        <span className="px-3 py-1 bg-green-500/20 rounded-full text-xs text-rose-200 border border-rose-500/30">Next.js</span>
+                                        <span className="px-3 py-1 bg-blue-500/20 rounded-full text-xs text-rose-200 border border-rose-500/30">TypeScript</span>
+                                        <span className="px-3 py-1 bg-yellow-500/20 rounded-full text-xs text-rose-200 border border-rose-500/30">Python</span>
+                                        <span className="px-3 py-1 bg-green-500/90 rounded-full text-xs text-rose-200 border border-rose-500/30">Node.js</span>
+                                    </div>
+                                </div>
+                                <div className="mt-5 pt-4 border-t border-slate-700/50">
+                                    <div className="flex items-center justify-center mb-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-rose-300 mr-2">
+                                            <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
+                                            <path d="M9 22v-4h6v4"></path>
+                                            <path d="M8 6h.01"></path>
+                                            <path d="M16 6h.01"></path>
+                                            <path d="M12 6h.01"></path>
+                                            <path d="M12 10h.01"></path>
+                                            <path d="M12 14h.01"></path>
+                                            <path d="M16 10h.01"></path>
+                                            <path d="M16 14h.01"></path>
+                                            <path d="M8 10h.01"></path>
+                                            <path d="M8 14h.01"></path>
+                                        </svg>
+                                        <p className="text-rose-200 text-xs font-medium">Trabajando actualmente en</p>
+                                    </div>
+                                    <div className="bg-slate-700/30 rounded-lg p-3 border border-rose-500/20">
+                                        <p className="text-white text-sm font-medium">T-Money ABDAK</p>
+                                        <p className="text-slate-300 text-xs">Desarrollador Full Stack & Team Lead</p>
+                                        <div className="mt-2 flex items-center justify-center">
+                                            <span className="inline-flex items-center px-2 py-1 rounded-full bg-green-500/20 text-green-300 text-xs">
+                                                <span className="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+                                                Disponible para proyectos
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="flex justify-center gap-3 mt-5">
+                                    <a href="https://www.linkedin.com/in/jose-luis-gutierrez-diaz-b06677312/" className="w-8 h-8 rounded-full bg-slate-700/70 flex items-center justify-center text-rose-300 hover:bg-rose-500/40 transition-colors" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    </a>
+                                    <a href="https://github.com/PollitoJLGD123" className="w-8 h-8 rounded-full bg-slate-700/70 flex items-center justify-center text-rose-300 hover:bg-rose-500/40 transition-colors" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+                                    </a>
+                                    <a href="https://www.facebook.com/joseluis.gutierrezdiaz.79" className="w-8 h-8 rounded-full bg-slate-700/70 flex items-center justify-center text-rose-300 hover:bg-rose-500/40 transition-colors" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                                    </a>
+                                    <a href="https://www.instagram.com/jose_luis_jlgd/" className="w-8 h-8 rounded-full bg-slate-700/70 flex items-center justify-center text-rose-300 hover:bg-rose-500/40 transition-colors" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><circle cx="17.5" cy="6.5" r="1.5"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.6, delay: 0.6 }}
+                            className="w-full lg:w-1/3 bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl overflow-hidden flex flex-col items-center pt-8"
+                        >
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-rose-500 to-pink-500"></div>
+                            <div className="relative mb-4">
+                                <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-slate-700 p-1 bg-slate-800">
+                                    <div className="w-full h-full rounded-full overflow-hidden">
+                                        <img
+                                            src="/about/colabs/user.png"
+                                            alt="Colaborador 3"
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="p-6 text-center w-full">
+                                <h3 className="text-xl font-bold text-white mb-1">Kevin E. Parimango</h3>
+                                <p className="text-rose-300 text-sm mb-3">Desarrollador Backend</p>
+                                <div className="h-px w-12 bg-gradient-to-r from-rose-500/30 to-pink-500/30 mx-auto mb-3"></div>
+                                <p className="text-slate-300 text-sm mb-4">
+                                    Desarrollador backend con experiencia en Spring y Next.js, enfocado en el diseño de arquitecturas escalables y el uso de microservicio.
+                                </p>
+                                <div className="mt-5 pt-4 border-t border-slate-700/50">
+                                    <div className="flex items-center justify-center gap-3 mb-2">
+                                        <div className="w-12 h-12 rounded-full overflow-hidden border border-rose-500/30 bg-white/10 p-0.5">
+                                            <img
+                                                src="/about/uni/unt.png"
+                                                alt="Logo Universidad"
+                                                className="w-full h-full object-cover rounded-full"
+                                            />
+                                        </div>
+                                        <div>
+                                            <p className="text-rose-200 text-xs font-medium">Universidad Nacional de Trujillo</p>
+                                            <p className="text-slate-400 text-xs text-left">Ingeniería de Sistemas</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="mt-5 pt-4 border-t border-slate-700/50">
+                                    <p className="text-rose-200 text-xs font-medium mb-3">Lenguajes & Tecnologías</p>
+                                    <div className="flex flex-wrap justify-center gap-2">
+                                        <span className="px-3 py-1 bg-red-400/70 rounded-full text-xs text-rose-200 border border-blue-500/30">Java</span>
+                                        <span className="px-3 py-1 bg-green-500/20 rounded-full text-xs text-rose-200 border border-rose-500/30">Next.js</span>
+                                        <span className="px-3 py-1 bg-red-500/80 rounded-full text-xs text-rose-200 border border-rose-500/30">Laravel</span>
+                                        <span className="px-3 py-1 bg-green-500/90 rounded-full text-xs text-rose-200 border border-rose-500/30">Spring</span>
+                                        <span className="px-3 py-1 bg-sky-500/90 rounded-full text-xs text-rose-200 border border-rose-500/30">SQL</span>
+                                    </div>
+                                </div>
+
+                                <div className="mt-4 pt-4 border-t border-slate-700/50">
+                                    <div className="flex items-center justify-center mb-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-rose-300 mr-2">
+                                            <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
+                                            <path d="M9 22v-4h6v4"></path>
+                                            <path d="M8 6h.01"></path>
+                                            <path d="M16 6h.01"></path>
+                                            <path d="M12 6h.01"></path>
+                                            <path d="M12 10h.01"></path>
+                                            <path d="M12 14h.01"></path>
+                                            <path d="M16 10h.01"></path>
+                                            <path d="M16 14h.01"></path>
+                                            <path d="M8 10h.01"></path>
+                                            <path d="M8 14h.01"></path>
+                                        </svg>
+                                        <p className="text-rose-200 text-xs font-medium">Trabajando actualmente en</p>
+                                    </div>
+                                    <div className="bg-slate-700/30 rounded-lg p-3 border border-rose-500/20">
+                                        <p className="text-white text-sm font-medium">Neon House Led (NHL)</p>
+                                        <p className="text-slate-300 text-xs">Desarrollador Backend</p>
+                                        <div className="mt-2 flex items-center justify-center">
+                                            <span className="inline-flex items-center px-2 py-1 rounded-full bg-green-500/20 text-green-300 text-xs">
+                                                <span className="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+                                                Disponible para proyectos
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flex justify-center gap-3 mb-5">
+                                <a href="https://www.linkedin.com/in/kevin-e-parimango-g%C3%B3mez-832315174/" className="w-8 h-8 rounded-full bg-slate-700/70 flex items-center justify-center text-rose-300 hover:bg-rose-500/40 transition-colors" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                </a>
+                                <a href="https://github.com/AleFine" className="w-8 h-8 rounded-full bg-slate-700/70 flex items-center justify-center text-rose-300 hover:bg-rose-500/40 transition-colors" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+                                </a>
+                                <a href="#" className="w-8 h-8 rounded-full bg-slate-700/70 flex items-center justify-center text-rose-300 hover:bg-rose-500/40 transition-colors" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                                </a>
+                                <a href="#" className="w-8 h-8 rounded-full bg-slate-700/70 flex items-center justify-center text-rose-300 hover:bg-rose-500/40 transition-colors" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><circle cx="17.5" cy="6.5" r="1.5"></circle></svg>
+                                </a>
+                            </div>
+                        </motion.div>
                     </div>
                 </motion.div>
 
