@@ -1,15 +1,19 @@
 "use client"
 
-import React, { useState } from "react"
-import { MapPin, Phone, Mail, Send, Clock } from 'lucide-react'
+import React, { useState, useEffect } from "react"
+import { MapPin, Phone, Mail, Send, Clock, CheckCircle2, XCircle, X } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useForm, ValidationError } from "@formspree/react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
+import Notification from "./component/Notificacion"
+
 
 export default function Contact() {
   const [state, handleSubmitFormspree] = useForm("mwplqggg")
+  const [notification, setNotification] = useState(null);
+
 
   const [formData, setFormData] = useState({
     name: "",
@@ -24,9 +28,13 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
+  const closeNotification = () => {
+    setNotification(null);
+  };
+
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    await handleSubmitFormspree(e)
+    e.preventDefault();
+    await handleSubmitFormspree(e);
 
     if (state.succeeded) {
       setFormData({
@@ -35,9 +43,23 @@ export default function Contact() {
         phone: "",
         subject: "",
         message: "",
-      })
+      });
+
+      // Mostrar notificación de éxito
+      setNotification({
+        type: "success",
+        title: "¡Mensaje enviado con éxito!",
+        message: "Gracias por contactarnos. Te responderemos lo más pronto posible."
+      });
+    } else if (state.errors?.length > 0) {
+      // Mostrar notificación de error
+      setNotification({
+        type: "error",
+        title: "Error al enviar el mensaje",
+        message: "Por favor verifica los campos e intenta nuevamente."
+      });
     }
-  }
+  };
 
   const containerVariants = {
     hidden: {},
@@ -62,6 +84,17 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-24 bg-gradient-to-b from-slate-950 to-slate-900 relative overflow-hidden">
+      <AnimatePresence>
+        {notification && (
+          <Notification
+            type={notification.type}
+            title={notification.title}
+            message={notification.message}
+            onClose={closeNotification}
+          />
+        )}
+      </AnimatePresence>
+
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-rose-500 rounded-full mix-blend-overlay filter blur-[120px] opacity-5 animate-pulse"></div>
         <div
@@ -161,12 +194,6 @@ export default function Contact() {
                 Envíanos un Mensaje
                 <span className="absolute -bottom-1 left-0 w-12 h-px bg-gradient-to-r from-rose-500 to-pink-500 opacity-70"></span>
               </h3>
-
-              {state.succeeded && (
-                <div className="bg-green-900/20 border border-green-500/30 text-green-400 rounded-lg p-4 mb-6">
-                  ¡Gracias por tu mensaje! Te responderemos pronto.
-                </div>
-              )}
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

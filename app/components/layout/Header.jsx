@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, use} from "react"
+import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { Menu, X, ChevronRight } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -8,7 +9,8 @@ import { motion, AnimatePresence } from "framer-motion"
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [activeLink, setActiveLink] = useState("inicio")
+  const pathname = usePathname()//nos da la ruta en la que estamos
+  const [activeLink, setActiveLink] = useState("")
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,6 +20,22 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  useEffect(() => {
+    if (pathname === "/") {
+      setActiveLink("inicio")
+    } else if (pathname.includes("/pages/about")) {
+      setActiveLink("nosotros")
+    } else if (pathname.includes("/pages/services")) {
+      setActiveLink("servicios")
+    } else if (pathname.includes("/pages/portfolio")) {
+      setActiveLink("portafolio")
+    } else if (pathname.includes("/pages/blog")) {
+      setActiveLink("blog")
+    } else if (pathname.includes("/pages/contact")) {
+      setActiveLink("contacto")
+    }
+  }, [pathname])
 
   const navLinks = [
     { name: "Inicio", href: "/" },
